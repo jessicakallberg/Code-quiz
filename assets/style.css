@@ -1,0 +1,162 @@
+
+body{
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    background-color: whitesmoke;
+}
+
+.hide{
+    display: none;
+}
+
+#start-box, #start-btn{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+/* Style the start btn*/
+#start-btn{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 160px;
+    height: 55px;
+    border: 1px solid #219EBC;
+    font-size: 22px;
+    font-weight: 500;
+    color: whitesmoke;
+    padding: 15px 30px;
+    outline: none;
+    border-radius: 5px;
+    background: #219EBC ;
+    cursor: pointer;
+    transition: all 0.1s ease;
+}
+
+#start-btn:hover{
+    color: white;
+    background: #FFB703 ;
+    border: #FFB703;
+}
+
+#start-box{
+    text-align: center;
+    width: 700px;
+    padding-bottom: 300px;
+}
+
+.quiz-title{
+    height: 60px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 25px;
+    font-weight: 600;
+    
+}
+
+/*the rules*/
+.rules-list{
+    font-size: 20px;
+}
+
+.rules-list .rules span{
+    font-weight: 600;
+    color: #FB8500;
+}
+
+/* the question box*/
+.box{
+    padding: 0;
+    margin: 0;
+    display: flex;
+    width: 100vw;
+    height: 70vh;
+    justify-content: center;
+    align-items: center;
+}
+
+/* tracker*/
+.tracker{
+    border-radius: 5px 5px 0 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+#score, #timer{
+    height: 70px;
+    padding: 30px 30px;
+    font-weight: 600;
+}
+
+#score{
+    color: #219EBC ;
+}
+
+#question{
+    font-size: 25px;
+    font-weight: 600;
+}
+
+#answer-button{
+    padding: 20px 0;
+    display: block;
+}
+.btn{
+    color: whitesmoke;
+    font-size: 17px;
+    background: #FFB703;
+    border: 1px solid #FFB703;
+    border-radius: 5px;
+    padding: 8px 15px;
+    margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+.btn:hover{
+    color: whitesmoke;
+    background: #FFB703;
+    border: 2.5px solid #FFB703 ;
+}
+
+.btn.correct{
+    background-color: green;
+    border: 2px solid green;
+}
+
+.btn.wrong{
+    background-color:red;
+    border: 2px solid red;
+}
+
+#next-box{
+    width: 25vw;
+}
+
+#next-btn{
+    float: right;
+    align-items: center;
+    justify-content: center;
+    width: 100px;
+    height: 40px;
+    border: 1px solid grey;
+    font-size: 22px;
+    font-weight: 500;
+    color: whitesmoke;
+    outline: none;
+    border-radius: 5px;
+    background: grey;
+    cursor: pointer;
+    transition: all 0.1s ease;
+}
+
+#next-btn:hover{
+    color: black;
+    background: grey ;
+    border: grey;
+}
