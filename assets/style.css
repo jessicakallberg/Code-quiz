@@ -85,7 +85,7 @@ body{
     align-items: center;
     justify-content: space-between;
 }
-#score, #timer{
+#score, #timer, #time-left, #high-score{
     height: 70px;
     padding: 30px 30px;
     font-weight: 600;
@@ -93,6 +93,16 @@ body{
 
 #score{
     color: #219EBC ;
+}
+
+#high-score{
+    float: left;
+    width: 65vw;
+    font-size: 25px;
+}
+
+#time-left{
+    font-size: 25px;
 }
 
 #question{
@@ -135,7 +145,7 @@ body{
 }
 
 #next-box{
-    width: 25vw;
+    width: 40vw;
 }
 
 #next-btn{
