@@ -4,7 +4,7 @@ const startButton = document.getElementById('start-btn')
 const nextButton = document.getElementById('next-btn')
 const questionBox = document.getElementById('question-box')
 const question = document.getElementById('question')
-const answer = document.getElementById('answer-buttons')
+const answerButton = document.getElementById('answer-button')
 const score = document.getElementById('score')
 const highScore = document.getElementById('high-score')
 const timer = document.getElementById('timer')
@@ -56,8 +56,11 @@ function setNextQuestion (){
         question.innerText = questions[questionIndex].name
         currentQuestionIndex++
         //console.log('next-question = ', currentQuestionIndex)
-        answer = questions[questionIndex].answers
-        questions.answers.forEach( answer => {
+        let answer = questions[questionIndex].answers
+
+        console.log(answerButton[questionIndex].text)
+
+        answer.forEach( answer => {
             const button = document.createElement('button')
             button.innerText = answer.text
             button.classList.add('btn')
@@ -65,7 +68,7 @@ function setNextQuestion (){
                 button.dataset.correct = answer.correct
             }
             button.addEventListener('click', selectAnswer)
-            answer.appendChild(button)
+            answerButton.appendChild(button)
         })
     }
 
