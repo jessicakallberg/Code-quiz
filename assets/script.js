@@ -47,7 +47,7 @@ function startQuiz(){
 }
 
 function setNextQuestion (){
-    //resetState()
+    resetState()
     showQuestion(currentQuestionIndex)
     }
 
@@ -58,7 +58,7 @@ function setNextQuestion (){
         //console.log('next-question = ', currentQuestionIndex)
         let answer = questions[questionIndex].answers
 
-        console.log(answerButton[questionIndex].text)
+        console.log(answer[questionIndex].text)
 
         answer.forEach( answer => {
             const button = document.createElement('button')
@@ -72,13 +72,13 @@ function setNextQuestion (){
         })
     }
 
-    //function resetState() {
-        //nextButton.classList.add('hide')
-        //while (answer.firstChild) {
-            //answer.removeChild
-            //(answer.firstChild)
-        //}
-    //}
+        function resetState() {
+            nextButton.classList.add('hide')
+            while (answer.firstChild) {
+            answer.removeChild
+            (answer.firstChild)
+        }
+    }
 
     function selectAnswer() {
         const selectedButton = e.target
