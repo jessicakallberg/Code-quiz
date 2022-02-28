@@ -58,7 +58,7 @@ function setNextQuestion (){
         //console.log('next-question = ', currentQuestionIndex)
         let answer = questions[questionIndex].answers
 
-        console.log(answer[questionIndex].text)
+        //console.log(answer[questionIndex].text)
 
         answer.forEach( answer => {
             const button = document.createElement('button')
@@ -73,10 +73,11 @@ function setNextQuestion (){
     }
 
         function resetState() {
-            nextButton.classList.add('hide')
-            while (answer.firstChild) {
-            answer.removeChild
-            (answer.firstChild)
+            
+            //nextButton.classList.add('hide')
+            while (answerButton.firstChild) {
+            answerButton.removeChild
+            (answerButton.firstChild)
         }
     }
 
