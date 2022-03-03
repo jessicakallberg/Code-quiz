@@ -10,28 +10,40 @@ const highScore = document.getElementById('high-score')
 const timer = document.getElementById('timer')
 const timeLeft = document.getElementById('time-left')
 const startingMinutes = 60
-
+var actualTimer;
 let currentQuestionIndex;
-let time = startingMinutes * 60
+let time = 60;
 
 //the timer
-    setInterval(updateCountdown, 1000);
 
-    function updateCountdown() {
-        const minutes = Math.floor(time/60);
-        let seconds = time % 60;
+function startCountdown() {
+    actualTimer = setInterval(updateCountdown, 1000);
+}
 
+function updateCountdown() {
 
-        timeLeft.innerHTML = `${seconds}`;
-        time--;
+    let seconds = time;
+    timeLeft.innerHTML = `${seconds}`;
+    time--;
+    console.log(parseInt(timeLeft.innerHTML));
+    if (time < 1) {
+        stopCountdown();
+
     }
+}
+
+function stopCountdown() {
+    clearInterval(actualTimer);
+    timeLeft.innerHTML = "Time's Up"
+}
 //attach event listener to start btn
 
-startButton.addEventListener('click',startQuiz)
+startButton.addEventListener('click', startQuiz)
 nextButton.addEventListener('click', setNextQuestion)
-//crate function to start quiz
-function startQuiz(){
+//create function to start quiz
+function startQuiz() {
     console.log('starting quiz')
+    startCountdown();
     //hide start box
     startBox.classList.add('hide')
     currentQuestionIndex = 0
@@ -40,113 +52,121 @@ function startQuiz(){
     highScore.classList.remove('hide')
     timer.classList.remove('hide')
     timeLeft.classList.remove('hide')
-    
+
     //create a function to get questions to render on screen
     setNextQuestion()
 
 }
 
-function setNextQuestion (){
+function setNextQuestion() {
     resetState()
     showQuestion(currentQuestionIndex)
-    }
+}
 
 //use the inner html to inject a question into the question box
-    function showQuestion(questionIndex) {
-        question.innerText = questions[questionIndex].name
-        currentQuestionIndex++
-        //console.log('next-question = ', currentQuestionIndex)
-        let answer = questions[questionIndex].answers
+function showQuestion(questionIndex) {
+    question.innerText = questions[questionIndex].name
+    currentQuestionIndex++
 
-        //console.log(answer[questionIndex].text)
+    let answer = questions[questionIndex].answers
 
-        answer.forEach( answer => {
-            const button = document.createElement('button')
-            button.innerText = answer.text
-            button.classList.add('btn')
-            if (answer.correct) {
-                button.dataset.correct = answer.correct
-            }
-            button.addEventListener('click', selectAnswer)
-            answerButton.appendChild(button)
+
+
+    answer.forEach(answer => {
+        const button = document.createElement('button')
+        button.innerText = answer.text
+        button.classList.add('btn')
+        if (answer.correct) {
+            button.dataset.correct = answer.correct
+        }
+        else {
+            button.dataset.correct = answer.correct
+
+        }
+        button.addEventListener('click', function (e) {
+            selectAnswer(e, answer);
         })
-    }
+        answerButton.appendChild(button)
+    })
+}
 
-        function resetState() {
-            
-            //nextButton.classList.add('hide')
-            while (answerButton.firstChild) {
-            answerButton.removeChild
+function resetState() {
+
+    //nextButton.classList.add('hide')
+    while (answerButton.firstChild) {
+        answerButton.removeChild
             (answerButton.firstChild)
-        }
     }
+}
 
-    function selectAnswer() {
-        const selectedButton = e.target
-        const correct = selectedButton.dataset.correct
-        setStatusClass(document.body, correct)
-        Array.from(answer.children).forEach(button => {
-            setStatusClass(button, button.dataset.correct)
-        })
-        
-    
-    }
+function selectAnswer(e, answer) {
+    const selectedButton = e.target
+    console.log(selectedButton, answer.correct);
 
-    function setStatusClass(element, correct) {
-        clearStatusClass(element)
-        if (correct) {
-            element.classList.add('correct')
-        } else {
-            element.classList.add('wrong')
-        }
-    }
+    const correct = selectedButton.dataset.correct;
 
-    function clearStatusClass(element) {
-        element.classList.remove('correct')
-        element.classList.remove('wrong')
-        
+
+    setStatusClass(selectedButton, correct)
+
+}
+
+function setStatusClass(element, correct) {
+    clearStatusClass(element)
+    if (correct == "true") {
+        element.classList.add('correct')
     }
+    else {
+        element.classList.add('wrong')
+        time = time - 10;
+    }
+}
+
+function clearStatusClass(element) {
+    element.classList.remove('correct')
+    element.classList.remove('wrong')
+
+}
 
 //variable for questions
 const questions = [
     {
         name: 'what does html stand for?',
         answers: [
-            {text: 'Hyper text markup language', correct: true},
-            {text: 'Hot tamale meat lovers', correct: false}, 
-            {text: 'Height mark lingo', correct:false},
+            { text: 'Hyper text markup language', correct: true },
+            { text: 'Hot tamale meat lovers', correct: false },
+            { text: 'Height mark lingo', correct: false },
         ]
     },
     {
         name: 'What does var stand for in JavaScript?',
-        answers: [ 
-            {text: 'Victory allocation reason',correct: false}, 
-            {text: 'Height mark lingo', correct:false},
-            {text: 'Variable', correct: true},
+        answers: [
+            { text: 'Victory allocation reason', correct: false },
+            { text: 'Height mark lingo', correct: false },
+            { text: 'Variable', correct: true },
         ]
     },
     {
         name: 'The "script" element is used to incorporate which type of code?',
-        answers: [ 
-            {text: 'Javascript', correct: true},
-            {text: 'HTML',correct: false}, 
-            {text: 'Python', correct:false},
+        answers: [
+            { text: 'Javascript', correct: true },
+            { text: 'HTML', correct: false },
+            { text: 'Python', correct: false },
         ]
     },
     {
         name: 'What does the "alert()" function tells the browser to do?',
-        answers:[
-            {text: 'Alert the user their cell phone battery is low',correct: false}, 
-            {text: 'Tell the browser to turn off the screen', correct:false},
-            {text: 'To display a message in form of a pop up window', correct: true},
+        answers: [
+            { text: 'Alert the user their cell phone battery is low', correct: false },
+            { text: 'Tell the browser to turn off the screen', correct: false },
+            { text: 'To display a message in form of a pop up window', correct: true },
         ]
     },
     {
-            name: 'What is the name for the code between the curly braces?',
-            answers: [
-            {text: 'Curly code',correct: false}, 
-            {text: 'C++', correct:false},
-            {text: 'code block', correct: true},
+        name: 'What is the name for the code between the curly braces?',
+        answers: [
+            { text: 'Curly code', correct: false },
+            { text: 'C++', correct: false },
+            { text: 'code block', correct: true },
         ]
     },
 ]
@@ -164,3 +184,26 @@ const questions = [
 //THEN the game is over
 //WHEN the game is over
 //THEN I can save my initials and score
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
