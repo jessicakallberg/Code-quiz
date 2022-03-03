@@ -91,8 +91,7 @@ function showQuestion(questionIndex) {
 }
 
 function resetState() {
-
-    //nextButton.classList.add('hide')
+    
     while (answerButton.firstChild) {
         answerButton.removeChild
             (answerButton.firstChild)
